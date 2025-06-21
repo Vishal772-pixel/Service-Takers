@@ -23,9 +23,6 @@ app.get("/", (req, res) => {
 
 
 
-
-
-
 //Service routes
 
 
