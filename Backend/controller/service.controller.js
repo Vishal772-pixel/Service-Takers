@@ -34,11 +34,11 @@ const createService = async(req,res)=> {
 
 }
 
-const getServices= async(req,res)=>{
+const getService= async(req,res)=>{
     try{
         const services = await serviceSchema.find();
         res.status(200).json({message:"Services fetched successfully",services});
-        
+
     } catch(error){
 
         console.log(error);

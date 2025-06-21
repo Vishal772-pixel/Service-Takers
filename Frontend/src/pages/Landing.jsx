@@ -255,7 +255,7 @@ const Landing = () => {
                 <div className="flex items-center space-x-4">
                   <span className="text-2xl">💬</span>
                   <span className="text-lg font-semibold text-gray-900">
-                    Let's chat
+                    Let&#39;s chat
                   </span>
                 </div>
               </div>

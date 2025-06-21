@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const GetServices = ({ user }) => {
   const [services, setServices] = useState([]);
@@ -12,7 +12,6 @@ const GetServices = ({ user }) => {
     maxPrice: '',
     search: ''
   });
-  const navigate = useNavigate();
 
   const categories = [
     'Development & IT',
@@ -36,7 +35,7 @@ const GetServices = ({ user }) => {
       if (response.data.success) {
         setServices(response.data.services || []);
       }
-    } catch (err) {
+    } catch {
       setError('Failed to fetch services. Please try again.',);
     } finally {
       setLoading(false);
@@ -45,7 +44,7 @@ const GetServices = ({ user }) => {
 
   useEffect(() => {
     fetchServices();
-    // eslint-disable-next-line
+
   }, []);
 
   const handleFilterChange = (e) => {
@@ -229,6 +228,11 @@ const GetServices = ({ user }) => {
       </div>
     </div>
   );
+};
+GetServices.propTypes = {
+  user: PropTypes.shape({
+    role: PropTypes.string
+  })
 };
 
 export default GetServices;

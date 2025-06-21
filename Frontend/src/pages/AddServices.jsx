@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const AddServices = ({ user }) => {
   const [formData, setFormData] = useState({
@@ -14,7 +14,6 @@ const AddServices = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
 
   const categories = [
     'Development & IT',
@@ -215,5 +214,13 @@ const AddServices = ({ user }) => {
     </div>
   );
 };
+AddServices.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    role: PropTypes.string
+  })
+};
+
 
 export default AddServices;

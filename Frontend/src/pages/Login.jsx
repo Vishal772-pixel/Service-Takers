@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -100,7 +101,7 @@ const Login = ({ onLogin }) => {
         </form>
 
         <p className="text-center mt-6 text-gray-600">
-          DONT't have an account?{' '}
+          DON&#39;t have an account?{' '}
           <button 
             onClick={() => navigate('/register')}
             className="text-primary-600 hover:text-primary-700 font-semibold"
@@ -111,6 +112,9 @@ const Login = ({ onLogin }) => {
       </div>
     </div>
   );
+};
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired
 };
 
 export default Login;

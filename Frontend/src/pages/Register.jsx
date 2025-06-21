@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const Register = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const Register = ({ onLogin }) => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8000/api/user/register', formData);
+      const response = await axios.post('http://localhost:8000/register', formData);
       
       if (response.data.success) {
         const userData = {
@@ -167,6 +168,12 @@ const Register = ({ onLogin }) => {
       </div>
     </div>
   );
+};
+
+
+
+Register.propTypes = {
+  onLogin: PropTypes.func.isRequired,
 };
 
 export default Register;
