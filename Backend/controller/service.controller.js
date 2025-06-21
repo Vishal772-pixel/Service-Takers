@@ -28,6 +28,22 @@ const createService = async(req,res)=> {
         console.log(error);
         res.status(500).json({message:"Internal server error"});
         
+
     }
+
+
 }
+
+const getServices= async(req,res)=>{
+    try{
+        const services = await serviceSchema.find();
+        res.status(200).json({message:"Services fetched successfully",services});
+        
+    } catch(error){
+
+        console.log(error);
+        res.status(500).json({message:"Internal server error"});
+    }
+    }
+
 
