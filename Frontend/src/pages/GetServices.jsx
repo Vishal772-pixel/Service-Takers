@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
-const GetServices = ({ user }) => {
+const GetServices = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -22,21 +21,20 @@ const GetServices = ({ user }) => {
     'Translation',
     'Writing & Translation',
     'Legal',
-    'Engineering'
+    'Engineering',
+    'Audio' // Add any other categories present in your data
   ];
-
-  ;
 
   const fetchServices = async () => {
     try {
       setLoading(true);
       const response = await axios.get('http://localhost:8000/getservices');
-      
-      if (response.data.success) {
+      if (response.data.services) {
         setServices(response.data.services);
+        console.log('Fetched services:', response.data.services);
       }
-    } catch (error){
-      setError('Error fetching data.',error);
+    } catch  {
+      setError('Error fetching data.');
     } finally {
       setLoading(false);
     }
@@ -44,7 +42,6 @@ const GetServices = ({ user }) => {
 
   useEffect(() => {
     fetchServices();
-
   }, []);
 
   const handleFilterChange = (e) => {
@@ -61,13 +58,8 @@ const GetServices = ({ user }) => {
     const matchesSearch = !filter.search || 
       service.title.toLowerCase().includes(filter.search.toLowerCase()) ||
       service.description.toLowerCase().includes(filter.search.toLowerCase());
-    
     return matchesCategory && matchesMinPrice && matchesMaxPrice && matchesSearch;
   });
-
-  if (!user || user.role !== 'serviceTaker') {
-   
-  
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -88,11 +80,10 @@ const GetServices = ({ user }) => {
                 name="search"
                 value={filter.search}
                 onChange={handleFilterChange}
-                placeholder="Search services..."
+                placeholder="Search available services..."
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               />
             </div>
-
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Category
@@ -111,7 +102,6 @@ const GetServices = ({ user }) => {
                 ))}
               </select>
             </div>
-
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Min Price ($)
@@ -125,7 +115,6 @@ const GetServices = ({ user }) => {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               />
             </div>
-
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Max Price ($)
@@ -157,10 +146,9 @@ const GetServices = ({ user }) => {
             <div className="mb-6 text-gray-600">
               {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''} found
             </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredServices.map(service => (
-                <div key={service.id} className="service-card">
+                <div key={service._id} className="service-card">
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-lg font-semibold text-gray-900 flex-1 mr-2">
@@ -170,15 +158,13 @@ const GetServices = ({ user }) => {
                         {service.category}
                       </span>
                     </div>
-                    
                     <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                       {service.description}
                     </p>
-
                     <div className="mb-4">
                       <strong className="text-gray-900 text-sm">Features:</strong>
                       <ul className="mt-2 space-y-1">
-                        {service.features && service.features.map((feature, index) => (
+                        {Array.isArray(service.features) && service.features.map((feature, index) => (
                           <li key={index} className="text-gray-600 text-sm flex items-start">
                             <span className="text-green-500 mr-2">✓</span>
                             {feature}
@@ -186,21 +172,19 @@ const GetServices = ({ user }) => {
                         ))}
                       </ul>
                     </div>
-
                     <div className="flex justify-between items-center mb-4 text-sm">
                       <div>
                         <div className="text-gray-600">
                           By {service.freelancerName}
                         </div>
                         <div className="text-gray-600">
-                          Delivery: {service.deliveryTime} day{service.deliveryTime !== 1 ? 's' : ''}
+                          Delivery: {service.deliveryTime}
                         </div>
                       </div>
                       <div className="text-xl font-bold text-green-600">
                         ${service.price}
                       </div>
                     </div>
-
                     <button 
                       className="w-full btn btn-primary"
                       onClick={() => alert('Contact feature coming soon!')}
@@ -211,7 +195,6 @@ const GetServices = ({ user }) => {
                 </div>
               ))}
             </div>
-
             {filteredServices.length === 0 && !loading && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🔍</div>
@@ -225,10 +208,5 @@ const GetServices = ({ user }) => {
     </div>
   );
 };
-GetServices.propTypes = {
-  user: PropTypes.shape({
-    role: PropTypes.string
-  })
-}};
 
 export default GetServices;

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
-const AddServices = ({ user }) => {
+const AddServices = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -24,10 +23,9 @@ const AddServices = ({ user }) => {
     'Translation',
     'Writing & Translation',
     'Legal',
-    'Engineering'
+    'Engineering',
+    'Audio'
   ];
-
- 
 
   const handleChange = (e) => {
     setFormData({
@@ -45,14 +43,10 @@ const AddServices = ({ user }) => {
     try {
       const serviceData = {
         ...formData,
-        freelancerId: user.id,
-        freelancerName: user.name,
         features: formData.features.split('\n').filter(f => f.trim())
       };
-
       const response = await axios.post('http://localhost:8000/addservices', serviceData);
-      
-      if (response.data.success) {
+      if (response.data.service) {
         setSuccess('Service added successfully!');
         setFormData({
           title: '',
@@ -70,21 +64,12 @@ const AddServices = ({ user }) => {
     }
   };
 
-  if (!user || user.role !== 'freelancer') {
-    // return (
-    //   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-    //     <div className="text-gray-600">Redirecting...</div>
-    //   </div>
-    // );
-  
-
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-sm p-8">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
           Add Your Service
         </h2>
-
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
             {error}
@@ -95,7 +80,6 @@ const AddServices = ({ user }) => {
             {success}
           </div>
         )}
-
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -112,7 +96,6 @@ const AddServices = ({ user }) => {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
             />
           </div>
-
           <div>
             <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-2">
               Category
@@ -133,7 +116,6 @@ const AddServices = ({ user }) => {
               ))}
             </select>
           </div>
-
           <div>
             <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
               Service Description
@@ -149,7 +131,6 @@ const AddServices = ({ user }) => {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical"
             />
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label htmlFor="price" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -167,25 +148,22 @@ const AddServices = ({ user }) => {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               />
             </div>
-
             <div>
               <label htmlFor="deliveryTime" className="block text-sm font-semibold text-gray-700 mb-2">
                 Delivery Time (days)
               </label>
               <input
-                type="number"
+                type="text"
                 id="deliveryTime"
                 name="deliveryTime"
                 value={formData.deliveryTime}
                 onChange={handleChange}
                 required
-                placeholder="3"
-                min="1"
+                placeholder="3 days"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               />
             </div>
           </div>
-
           <div>
             <label htmlFor="features" className="block text-sm font-semibold text-gray-700 mb-2">
               Service Features (one per line)
@@ -196,12 +174,11 @@ const AddServices = ({ user }) => {
               value={formData.features}
               onChange={handleChange}
               required
-              placeholder="Professional design&#10;Unlimited revisions&#10;Source files included&#10;24/7 support"
+              placeholder={"Professional design\nUnlimited revisions\nSource files included\n24/7 support"}
               rows="4"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical"
             />
           </div>
-
           <button 
             type="submit" 
             className="w-full btn btn-primary py-3 text-base"
@@ -214,13 +191,5 @@ const AddServices = ({ user }) => {
     </div>
   );
 };
-AddServices.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    name: PropTypes.string,
-    role: PropTypes.string
-  })
-}};
-
 
 export default AddServices;

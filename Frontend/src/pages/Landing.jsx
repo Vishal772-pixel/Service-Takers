@@ -1,5 +1,7 @@
 const Landing = () => {
-  const services = [
+  const services =
+  
+  [
     {
       id: 1,
       title: "Graphic Designer",
