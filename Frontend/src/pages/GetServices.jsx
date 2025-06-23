@@ -33,10 +33,10 @@ const GetServices = ({ user }) => {
       const response = await axios.get('http://localhost:8000/getservices');
       
       if (response.data.success) {
-        setServices(response.data.services || []);
+        setServices(response.data.services);
       }
-    } catch {
-      setError('Failed to fetch services. Please try again.',);
+    } catch (error){
+      setError('Error fetching data.',error);
     } finally {
       setLoading(false);
     }
@@ -66,12 +66,8 @@ const GetServices = ({ user }) => {
   });
 
   if (!user || user.role !== 'serviceTaker') {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-600">Redirecting...</div>
-      </div>
-    );
-  }
+   
+  
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -233,6 +229,6 @@ GetServices.propTypes = {
   user: PropTypes.shape({
     role: PropTypes.string
   })
-};
+}};
 
 export default GetServices;

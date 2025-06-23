@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import connectDB from "../db/index.js";
 import userRoutes from "../route/user.route.js";
+import serviceRoutes from "../route/services.route.js";
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 
 const app = express();
@@ -13,7 +14,14 @@ app.use(cors({
     origin:"http://localhost:5173"
 }));
 
+
 app.use(express.json());
+// Re intialize the routes ..u are using below 
+
+
+app.use("/", userRoutes);
+app.use("/",serviceRoutes);
+
 
 // Root route
 app.get("/", (req, res) => {

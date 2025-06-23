@@ -71,12 +71,12 @@ const AddServices = ({ user }) => {
   };
 
   if (!user || user.role !== 'freelancer') {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-600">Redirecting...</div>
-      </div>
-    );
-  }
+    // return (
+    //   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    //     <div className="text-gray-600">Redirecting...</div>
+    //   </div>
+    // );
+  
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -220,7 +220,7 @@ AddServices.propTypes = {
     name: PropTypes.string,
     role: PropTypes.string
   })
-};
+}};
 
 
 export default AddServices;

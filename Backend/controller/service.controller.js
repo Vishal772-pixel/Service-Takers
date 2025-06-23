@@ -3,7 +3,7 @@
 
 import express from "express";
 import mongoose from "mongoose";
-import serviceSchema from "../model/services.model.js";
+import Service from "../model/services.model.js";
 
 const createService = async(req,res)=> {
     try {
@@ -11,7 +11,7 @@ const createService = async(req,res)=> {
         if(!title||!description||!category||!price||!deliveryTime||!features){
             return res.status(400).json({message:"All fields are required"});
         }
-        const newService = new serviceSchema({
+        const newService = new Service({
             title,
             description,
             category,
@@ -26,7 +26,7 @@ const createService = async(req,res)=> {
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:"Internal server error"});
+        res.status(500).json({message:"Internal server error", error:error.message});
         
 
     }
@@ -36,14 +36,15 @@ const createService = async(req,res)=> {
 
 const getService= async(req,res)=>{
     try{
-        const services = await serviceSchema.find();
+        const services = await Service.find();
         res.status(200).json({message:"Services fetched successfully",services});
 
     } catch(error){
 
         console.log(error);
-        res.status(500).json({message:"Internal server error"});
+        res.status(500).json({message:"Internal server error",error:error.message});
     }
     }
 
 
+export {createService,getService}

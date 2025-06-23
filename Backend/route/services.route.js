@@ -6,8 +6,9 @@ import {createService,getService} from '../controller/service.controller.js';
 const serviceRoutes = express.Router();
 
 // Create Service Route
-serviceRoutes.post('/addservices', createService);
+serviceRoutes.post('/addservices',createService);
 
 
 // Get Services Route
-serviceRoutes.get('getservices',getServices);
+serviceRoutes.get('/getservices',getService);
+export default serviceRoutes;

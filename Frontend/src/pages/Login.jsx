@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
-const Login = ({ onLogin }) => {
+
+const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -25,11 +25,11 @@ const Login = ({ onLogin }) => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8000/api/user/login', formData);
+      const response = await axios.post('http://localhost:8000/login', formData);
       
       if (response.data.success) {
         const userData = response.data.user;
-        onLogin(userData);
+        (userData);
         
         // Navigate based on user role
         if (userData.role === 'freelancer') {
@@ -113,8 +113,6 @@ const Login = ({ onLogin }) => {
     </div>
   );
 };
-Login.propTypes = {
-  onLogin: PropTypes.func.isRequired
-};
+
 
 export default Login;
