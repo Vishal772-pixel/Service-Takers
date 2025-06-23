@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-//  title: '',
-//     description: '',
-//     category: '',
-//     price: '',
-//     deliveryTime: '',
+//  title: ,
+//     description: ,
+//     category: ,
+//     price: ,
+//     deliveryTime:,
 //     features:
 const serviceSchema =new mongoose.Schema({
     title:{

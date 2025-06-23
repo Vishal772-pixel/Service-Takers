@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 
 //Regsiter => post /register
  
-export const register = asyncHandler(async (req, res) => {
+export const register = (async (req, res) => {
   const { name, email, password,role } = req.body;
 
   const userExists = await User.findOne({ email });
@@ -41,6 +41,11 @@ export const register = asyncHandler(async (req, res) => {
     throw new Error("Invalid user data");
   }
 });
+
+
+
+
+
 
 
 
