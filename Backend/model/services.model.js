@@ -24,6 +24,13 @@ const serviceSchema =new mongoose.Schema({
         type:"Number",
         required:true,
     },
+
+    name:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+        
+
+    },
     deliveryTime:{
         type:"Number",
         required:true,

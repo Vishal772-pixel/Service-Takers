@@ -175,7 +175,7 @@ const GetServices = () => {
                     <div className="flex justify-between items-center mb-4 text-sm">
                       <div>
                         <div className="text-gray-600">
-                          By {service.freelancerName}
+                          By {service.name}
                         </div>
                         <div className="text-gray-600">
                           Delivery: {service.deliveryTime}

@@ -17,6 +17,7 @@ const createService = async(req,res)=> {
             category,
             price,
             deliveryTime,
+            name,
             features
         })
         await newService.save();

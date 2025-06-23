@@ -54,6 +54,7 @@ const AddServices = () => {
           category: '',
           price: '',
           deliveryTime: '',
+          name:'',
           features: ''
         });
       }
@@ -163,7 +164,7 @@ const AddServices = () => {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
               />
             </div>
-          </div>
+            </div>
           <div>
             <label htmlFor="features" className="block text-sm font-semibold text-gray-700 mb-2">
               Service Features (one per line)
