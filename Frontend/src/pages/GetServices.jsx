@@ -70,7 +70,7 @@ const GetServices = () => {
 
         {/* Filters */}
         <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg: gap-grid-cols-44">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Search

@@ -118,8 +118,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Trusted By Section */}
-      {/* <section className="bg-white py-8 border-b border-gray-100">
+       <section className="bg-white py-8 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-500 mb-6">Trusted by</p>
           <div className="flex justify-center items-center space-x-8 flex-wrap gap-4">
@@ -130,7 +129,7 @@ const Landing = () => {
             <span className="text-gray-400 font-bold text-lg">✓ Zoom</span>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Latest Services */}
       <section className="py-16 lg:py-24 bg-gray-50">
